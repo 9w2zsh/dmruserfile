@@ -1,3 +1,6 @@
+#read from users.csv
+#store the country name and compare with the next line. 
+#if its not same, write to countrlist.csv
 import csv
 
 f1 = open('users.csv', encoding='utf-8')
