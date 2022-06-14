@@ -1,26 +1,20 @@
+#extract users based on the country
 import csv
+import pandas as pd
 
-f1 = open('users.csv', encoding='utf-8')
-f2 = open('ctrylist.csv','w+',newline='') #remove blank line in between output
-csv_rd = csv.reader(f1)
-csv_wr = csv.writer(f2) #use ',' as delimeter, '"' as quote and quote all items
-ctry = ""
-hamnum = 0
-ctrylist = []
-hamnumlist = []
-for row in csv_rd:
-    if (row[6].upper() != ctry.upper()):
-        ctrylist.append(row[6])
-        hamnumlist.append(hamnum)
-        ctry = row[6]
-        hamnum = 0
-        #print(row[6])
-        #csv_wr.writerow(row)
-    else:
-        hamnum = hamnum + 1
+with open('users.csv',newline='',encoding='utf-8') as f:
+    reader = csv.reader(f)
+    data = list(reader)
 
-csv_wr.writerow(ctrylist.split())
-csv_wr.writerow(hamnumlist.split())
+countries = ["AUSTRALIA","BAHRAIN","BANGLADESH","BRUNEI DARUSSALAM","CANADA","CHINA","DENMARK","FINLAND","FRANCE","GEORGIA","GERMANY","HONG KONG","HUNGARY","INDIA","INDONESIA","IRELAND","ITALY","JAPAN","KOREA REPUBLIC OF","KUWAIT","MALAYSIA","MALTA","MEXICO","NETHERLANDS","NEW ZEALAND","NORWAY","PAKISTAN","PHILIPPINES","POLAND","PORTUGAL","QATAR","SAUDI ARABIA","SINGAPORE","SOUTH AFRICA","SPAIN","SRI LANKA","SWEDEN","SWITZERLAND","TAIWAN","THAILAND","TURKEY","UNITED ARAB EMIRATES","UNITED KINGDOM","UNITED STATES"]
+ctryname = []
 
-f1.close()
-f2.close()
+for i in range(len(data)):
+    for j in range(len(countries)):
+        #print(countries[j])
+        if ((data[i][6]).upper() == countries[j]):
+            #print(data[i])
+            ctryname.append(data[i])
+
+countrydf = pd.DataFrame(ctryname)
+countrydf.to_csv('myusers.csv', index=False)
