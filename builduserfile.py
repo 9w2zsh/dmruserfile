@@ -13,7 +13,7 @@ for i in range(len(data)):
     for j in range(len(countries)):
         #print(countries[j])
         if ((data[i][6]).upper() == countries[j]):
-            #print(data[i])
+            print(data[i])
             ctryname.append(data[i])
 
 countrydf = pd.DataFrame(ctryname)
